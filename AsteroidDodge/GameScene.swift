@@ -8,12 +8,12 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    private let playerRadius: CGFloat = 24
+    private let playerSize = CGSize(width: 96, height: 96)
     private let asteroidRadius: CGFloat = 22
     private let spawnInterval: TimeInterval = 1.0
     private let asteroidSpeed: CGFloat = 220
 
-    private var playerNode: SKShapeNode!
+    private var playerNode: SKSpriteNode!
     private var scoreLabel: SKLabelNode!
     private var gameOverLabel: SKLabelNode?
     private var finalScoreLabel: SKLabelNode?
@@ -30,6 +30,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private struct PhysicsCategory {
         static let player: UInt32 = 0x1 << 0
         static let asteroid: UInt32 = 0x1 << 1
+    }
+
+    private var playerRadius: CGFloat {
+        min(playerSize.width, playerSize.height) * 0.5
     }
 
     override func didMove(to view: SKView) {
@@ -51,9 +55,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func createPlayer() {
-        let player = SKShapeNode(circleOfRadius: playerRadius)
-        player.fillColor = SKColor(red: 0.2, green: 0.85, blue: 0.95, alpha: 1.0)
-        player.strokeColor = SKColor.clear
+        let player = SKSpriteNode(imageNamed: "Raumschiff")
+        player.size = playerSize
         player.position = CGPoint(x: frame.midX, y: frame.minY + playerRadius + 40)
         player.name = "player"
 
@@ -244,8 +247,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         restartButton = button
 
         let restart = SKLabelNode(fontNamed: "AvenirNext-Bold")
-        restart.fontSize = 18
-        restart.fontColor = SKColor.white
+        restart.fontSize = 22
+        restart.fontColor = SKColor(red: 0.92, green: 0.86, blue: 1.0, alpha: 1.0)
         restart.text = "New Game"
         restart.position = .zero
         restart.zPosition = 102
