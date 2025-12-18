@@ -9,7 +9,7 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     private let playerSize = CGSize(width: 96, height: 96)
-    private let asteroidRadius: CGFloat = 22
+    private let asteroidRadius: CGFloat = 24
     private let spawnInterval: TimeInterval = 1.0
     private let asteroidSpeed: CGFloat = 220
 
